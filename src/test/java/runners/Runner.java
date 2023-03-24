@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         },
         features = "./src/test/Resources",
         glue = {"stepdefinitions"},
-        tags = "@jdbc",
+        tags = "@address",
         dryRun = false
 )
 

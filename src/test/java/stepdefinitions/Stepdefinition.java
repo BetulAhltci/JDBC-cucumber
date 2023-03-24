@@ -3,9 +3,12 @@ package stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import utilities.DBUtils;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -37,6 +40,8 @@ public class Stepdefinition {
         Statement statement;
         ResultSet resultset;
 
+        List<Object> staffId=new ArrayList<>();
+        List<Object> addressList=new ArrayList<>();
 
         @Given("Database ile iletisimi baslat")
         public void database_ile_iletisimi_baslat() throws SQLException {
@@ -85,14 +90,73 @@ public class Stepdefinition {
                         sira++;
                 }
 
-                resultset.absolute(11);
+                resultset.absolute(6);
                 System.out.println(resultset.getString("email"));
+                System.out.println(resultset.getString("phone"));
+                System.out.println(resultset.getString("username"));
+                System.out.println(resultset.getString("password"));
 
         }
         @Then("Database kapatilir")
         public void database_kapatilir() throws SQLException {
                 connection.close();
         }
+//==================================================================================0
+        @Given("Database baglantisi kurulur")
+        public void database_baglantisi_kurulur() {
+
+        DBUtils.getConnection();
+
+}
+        @Given("Staff tablosundaki {string} leri listelenir")
+        public void staff_tablosundaki_leri_listelenir(String id) {
+
+                staffId=DBUtils.getColumnData("SELECT * FROM u480337000_tlb_training.staff",id);
+                System.out.println(staffId);
+
+
+        }
+        @Given("Verilen {string} dogrulanir")
+        public void verilen_dogrulanir(String verilenID) {
+                assertTrue(staffId.toString().contains(verilenID));
+
+
+
+        }
+
+        //===========================================================0
+
+
+
+        @Given("{string} degeri verilen customerin {string} gümcellenir")
+        public void degeri_verilen_customerin_guncellenir(String id, String address) throws SQLException {
+                String query="UPDATE u480337000_tlb_training.customer_addresses\n" +
+                                "SET address= '"+address+"' WHERE id="+id;
+                System.out.println(query);
+
+                DBUtils.update(query);
+
+
+        }
+        @Given("custumer addresss tablosundaki {string} bilgileri istenir")
+        public void custumer_addresss_tablosundaki_bilgileri_istenir(String columname) {
+
+                String query= "SELECT * FROM u480337000_tlb_training.customer_addresses";
+
+              addressList =DBUtils.getColumnData(columname,query);
+                System.out.println(addressList);
+
+
+        }
+        @Given("customerin {string} guncelledigi dogrulanir")
+        public void customerin_guncelledigi_dogrulanir(String string) {
+
+        }
+        @Given("Data baglantisi kapatilir")
+        public void data_baglantisi_kapatilir() {
+
+        }
+
 
 
 }

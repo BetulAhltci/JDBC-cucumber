@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="7.691">
-    <testcase classname="JDBC uzerinden Databse baglantisi kurularak ilk test" name="Users tablosundan isimler testi." time="7.202">
-        <system-out>
-            <![CDATA[Given Database ile iletisimi baslat.........................................passed
-Then Query statement araciligi ile database gonderilir......................passed
-Then Databaseden donen resulset verisi test edilir..........................passed
-And Database kapatilir......................................................passed
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="2.837">
+    <testcase classname="JDBC baglantisi uzerinden update sorgusu yapma" name="_2" time="2.297">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception">
+            <![CDATA[* Database baglantisi kurulur...............................................passed
+* "1" degeri verilen customerin "Kadikoy" guncellenir.......................undefined
+* custumer addresss tablosundaki "address" bilgileri istenir................skipped
+* customerin "Kadikoy" guncelledigi dogrulanir..............................skipped
+* Data baglantisi kapatilir.................................................skipped
 ]]>
-        </system-out>
+        </failure>
     </testcase>
 </testsuite>
